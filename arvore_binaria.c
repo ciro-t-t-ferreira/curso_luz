@@ -48,6 +48,34 @@ void ler_em_ordem(Node* root) {
     }
 }
 
+void deleta_arvore(Node* root){
+    
+    if (root == NULL){
+    printf("if, logo root=NULL\n");
+        return;
+    }
+    
+    deleta_arvore(root->left);
+    printf("left, root=%d\n", root->data);
+    deleta_arvore(root->right);
+    printf("right, root=%d\n", root->data);
+    
+    free(root);
+    root = NULL;
+    
+}
+
+void verifica_existencia(Node* root){ //DÚVIDA: esse método checa apenas a existência do root, mas não me garante que não sobraram nós na memória
+    if (root == NULL){
+        printf("Árvore não existe\n");
+    }
+    else{
+        printf("Árvore existe\n");
+    }
+
+}
+
+
 int main() {
     Node* root = NULL;
 
@@ -57,8 +85,7 @@ int main() {
     root = insert(root, 7);
     root = insert(root, 12);
     root = insert(root, 18);
-    root = insert(root, 20);
-    root = insert(root, 6);
+   
     
     printf("Árvore binária em ordem: ");
     ler_em_ordem(root);
@@ -70,6 +97,9 @@ int main() {
     } else {
         printf("%d não encontrado na árvore.\n", numberToFind);
     }
+
+deleta_arvore(root);
+
 
     return 0;
 }
